@@ -1,4 +1,5 @@
 import React, { ReactNode } from 'react'
+import Head from 'next/head'
 import styles from '../styles/Home.module.css'
 import clsx from 'clsx';
 import { createStyles, WithStyles, withStyles} from '@material-ui/core/styles';
@@ -114,10 +115,15 @@ class Layout extends React.Component<LayoutProps> {
     };
 
     render(){
-        const {classes, children, theme} = this.props;
+        const {classes, title, children, theme} = this.props;
 
         return (
             <div className={classes.root}>
+                <Head>
+                    <title>{title}</title>
+                    <meta charSet="utf-8" />
+                    <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                </Head>
                 <CssBaseline />
                 <AppBar
                     position="fixed"
@@ -175,7 +181,10 @@ class Layout extends React.Component<LayoutProps> {
                         {children}
                     </div>
                 </main>
-
+                <footer>
+                    <hr />
+                    <span>I'm here to stay (Footer)</span>
+                </footer>
             </div>
         );
     }
