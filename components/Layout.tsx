@@ -14,12 +14,13 @@ import Divider from '@material-ui/core/Divider';
 import IconButton from '@material-ui/core/IconButton';
 import MenuIcon from '@material-ui/icons/Menu';
 import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
-import ChevronRightIcon from '@material-ui/icons/ChevronRight';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemIcon from '@material-ui/core/ListItemIcon';
 import ListItemText from '@material-ui/core/ListItemText';
 import InboxIcon from '@material-ui/icons/MoveToInbox';
 import MailIcon from '@material-ui/icons/Mail';
+import Icon from '@material-ui/core/Icon';
+import Link from 'next/link'
 
 const drawerWidth = 240;
 
@@ -29,22 +30,21 @@ const useStyles = (theme: Theme) =>
             display: 'flex',
         },
         appBar: {
-            zIndex: theme.zIndex.drawer + 1,
-            transition: theme.transitions.create(['width', 'margin'], {
+            transition: theme.transitions.create(['margin', 'width'], {
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.leavingScreen,
             }),
         },
         appBarShift: {
-            marginLeft: drawerWidth,
             width: `calc(100% - ${drawerWidth}px)`,
-            transition: theme.transitions.create(['width', 'margin'], {
-                easing: theme.transitions.easing.sharp,
+            marginLeft: drawerWidth,
+            transition: theme.transitions.create(['margin', 'width'], {
+                easing: theme.transitions.easing.easeOut,
                 duration: theme.transitions.duration.enteringScreen,
             }),
         },
         menuButton: {
-            marginRight: 36,
+            marginRight: theme.spacing(2),
         },
         hide: {
             display: 'none',
@@ -52,37 +52,33 @@ const useStyles = (theme: Theme) =>
         drawer: {
             width: drawerWidth,
             flexShrink: 0,
-            whiteSpace: 'nowrap',
         },
-        drawerOpen: {
+        drawerPaper: {
             width: drawerWidth,
-            transition: theme.transitions.create('width', {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
         },
-        drawerClose: {
-            transition: theme.transitions.create('width', {
-                easing: theme.transitions.easing.sharp,
-                duration: theme.transitions.duration.leavingScreen,
-            }),
-            overflowX: 'hidden',
-            width: theme.spacing(7) + 1,
-            [theme.breakpoints.up('sm')]: {
-                width: theme.spacing(9) + 1,
-            },
-        },
-        toolbar: {
+        drawerHeader: {
             display: 'flex',
             alignItems: 'center',
-            justifyContent: 'flex-end',
             padding: theme.spacing(0, 1),
             // necessary for content to be below app bar
             ...theme.mixins.toolbar,
+            justifyContent: 'flex-end',
         },
         content: {
             flexGrow: 1,
             padding: theme.spacing(3),
+            transition: theme.transitions.create('margin', {
+                easing: theme.transitions.easing.sharp,
+                duration: theme.transitions.duration.leavingScreen,
+            }),
+            marginLeft: -drawerWidth,
+        },
+        contentShift: {
+            transition: theme.transitions.create('margin', {
+                easing: theme.transitions.easing.easeOut,
+                duration: theme.transitions.duration.enteringScreen,
+            }),
+            marginLeft: 0,
         },
     });
 export interface LayoutProps extends WithStyles<typeof useStyles> {
@@ -95,7 +91,14 @@ export interface LayoutState {
     open : boolean
 }
 
+export interface itemDataList{
+    name : string
+    url : string
+    icon : string
+}
+
 class Layout extends React.Component<LayoutProps> {
+
 
     state:LayoutState = {
         open:false
@@ -115,14 +118,28 @@ class Layout extends React.Component<LayoutProps> {
     };
 
     render(){
-        const {classes, title, children, theme} = this.props;
+        const {classes, title, children} = this.props;
 
+        const dummyList:Array<itemDataList> = [
+            {
+                name: "Home",
+                url : "/",
+                icon : "home"
+            },
+            {
+                name: "about",
+                url : "/about",
+                icon : "mail"
+            }
+        ]
         return (
             <div className={classes.root}>
                 <Head>
                     <title>{title}</title>
                     <meta charSet="utf-8" />
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
+                    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
                 </Head>
                 <CssBaseline />
                 <AppBar
@@ -137,38 +154,43 @@ class Layout extends React.Component<LayoutProps> {
                             aria-label="open drawer"
                             onClick={this.handleDrawerOpen}
                             edge="start"
-                            className={clsx(classes.menuButton, {
-                                [classes.hide]: this.state.open,
-                            })}
+                            className={clsx(classes.menuButton, this.state.open && classes.hide)}
                         >
                             <MenuIcon />
                         </IconButton>
                         <Typography variant="h6" noWrap>
-                            Mini variant drawer
+                            Persistent drawer
                         </Typography>
                     </Toolbar>
                 </AppBar>
                 <Drawer
-                    variant="permanent"
-                    className={clsx(classes.drawer, {
-                        [classes.drawerOpen]: this.state.open,
-                        [classes.drawerClose]: !this.state.open,
-                    })}
+                    className={classes.drawer}
+                    variant="persistent"
+                    anchor="left"
+                    open={this.state.open}
                     classes={{
-                        paper: clsx({
-                            [classes.drawerOpen]: this.state.open,
-                            [classes.drawerClose]: !this.state.open,
-                        }),
+                        paper: classes.drawerPaper,
                     }}
                 >
-                    <div className={classes.toolbar}>
+                    <div className={classes.drawerHeader}>
                         <IconButton onClick={this.handleDrawerClose}>
-                            {theme === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+                            <ChevronLeftIcon />
                         </IconButton>
                     </div>
                     <Divider />
                     <List>
-                        {['Inbox', 'Starred', 'Send email', 'Drafts'].map((text, index) => (
+                        {dummyList.map((item) => (
+                            <Link href={item.url}>
+                                <ListItem button key={item.name}>
+                                    <ListItemIcon><div style={{display: 'flex'}}><Icon>{item.icon}</Icon></div></ListItemIcon>
+                                    <ListItemText primary={item.name} />
+                                </ListItem>
+                            </Link>
+                        ))}
+                    </List>
+                    <Divider />
+                    <List>
+                        {['All mail', 'Trash', 'Spam'].map((text, index) => (
                             <ListItem button key={text}>
                                 <ListItemIcon>{index % 2 === 0 ? <InboxIcon /> : <MailIcon />}</ListItemIcon>
                                 <ListItemText primary={text} />
@@ -176,7 +198,12 @@ class Layout extends React.Component<LayoutProps> {
                         ))}
                     </List>
                 </Drawer>
-                <main>
+                <main
+                    className={clsx(classes.content, {
+                        [classes.contentShift]: this.state.open,
+                    })}
+                >
+                    <div className={classes.drawerHeader} />
                     <div className={styles.container}>
                         {children}
                     </div>
