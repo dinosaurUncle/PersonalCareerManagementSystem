@@ -20,6 +20,7 @@ import MoreVertIcon from '@material-ui/icons/MoreVert';
 const useStyles = (theme: Theme) =>
     createStyles({
         root: {
+            margin: 30,
             maxWidth: 345,
         },
         media: {
@@ -40,16 +41,39 @@ const useStyles = (theme: Theme) =>
             backgroundColor: red[500],
         },
     });
-export interface CardComponentProps extends WithStyles<typeof useStyles> {}
+
+
+export interface CardComponentProps extends WithStyles<typeof useStyles> {
+    CardItem : CardItem
+}
+
+export interface  CardItem {
+    CardLabel : string
+    CardHeaderTitle : string
+    CardHeaderSubheader : string
+    CardMediaImage : string
+    CardMediaTitle: string
+    CardContent : string
+    CardContentTypography1: string
+    CardContentTypography2: string
+    CardContentTypography3: string
+    CardContentTypography4: string
+    CardContentTypography5: string
+}
 
 export interface CardComponentState {
     expanded : boolean
 }
 
+
+
 class CardComponent extends React.Component<CardComponentProps> {
 
+
+
     state:CardComponentState = {
-        expanded:false
+        expanded:false,
+
     }
 
     setExpanded(input:boolean){
@@ -66,7 +90,7 @@ class CardComponent extends React.Component<CardComponentProps> {
     };
 
     render(){
-        const {classes} = this.props;
+        const {classes, CardItem} = this.props;
         return (
             <Card className={classes.root}>
                 <CardHeader
@@ -91,7 +115,7 @@ class CardComponent extends React.Component<CardComponentProps> {
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
                         This impressive paella is a perfect party dish and a fun meal to cook together with your
-                        guests. Add 1 cup of frozen peas along with the mussels, if you like.
+                        guests. Add 1 cup of frozen peas along with the mussels, if you like.{CardItem.CardContentTypography1}
                     </Typography>
                 </CardContent>
                 <CardActions disableSpacing>
