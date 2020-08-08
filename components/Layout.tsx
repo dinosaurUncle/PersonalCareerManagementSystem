@@ -24,16 +24,16 @@ const drawerWidth = 240;
 
 const useStyles = (theme: Theme) =>
     createStyles({
-        root: {
+        layoutRoot: {
             display: 'flex',
         },
-        appBar: {
+        layoutAppBar: {
             transition: theme.transitions.create(['margin', 'width'], {
                 easing: theme.transitions.easing.sharp,
                 duration: theme.transitions.duration.leavingScreen,
             }),
         },
-        appBarShift: {
+        layoutAppBarShift: {
             width: `calc(100% - ${drawerWidth}px)`,
             marginLeft: drawerWidth,
             transition: theme.transitions.create(['margin', 'width'], {
@@ -41,20 +41,20 @@ const useStyles = (theme: Theme) =>
                 duration: theme.transitions.duration.enteringScreen,
             }),
         },
-        menuButton: {
+        layoutMenuButton: {
             marginRight: theme.spacing(2),
         },
-        hide: {
+        layoutHide: {
             display: 'none',
         },
-        drawer: {
+        layoutDrawer: {
             width: drawerWidth,
             flexShrink: 0,
         },
-        drawerPaper: {
+        layoutDrawerPaper: {
             width: drawerWidth,
         },
-        drawerHeader: {
+        layoutDrawerHeader: {
             display: 'flex',
             alignItems: 'center',
             padding: theme.spacing(0, 1),
@@ -62,7 +62,7 @@ const useStyles = (theme: Theme) =>
             ...theme.mixins.toolbar,
             justifyContent: 'flex-end',
         },
-        content: {
+        layoutContent: {
             flexGrow: 1,
             padding: theme.spacing(3),
             transition: theme.transitions.create('margin', {
@@ -71,7 +71,7 @@ const useStyles = (theme: Theme) =>
             }),
             marginLeft: -drawerWidth,
         },
-        contentShift: {
+        layoutContentShift: {
             transition: theme.transitions.create('margin', {
                 easing: theme.transitions.easing.easeOut,
                 duration: theme.transitions.duration.enteringScreen,
@@ -131,7 +131,7 @@ class Layout extends React.Component<LayoutProps> {
             }
         ]
         return (
-            <div className={classes.root}>
+            <div className={classes.layoutRoot}>
                 <Head>
                     <title>{title}</title>
                     <meta charSet="utf-8" />
@@ -142,8 +142,8 @@ class Layout extends React.Component<LayoutProps> {
                 <CssBaseline />
                 <AppBar
                     position="fixed"
-                    className={clsx(classes.appBar, {
-                        [classes.appBarShift]: this.state.open,
+                    className={clsx(classes.layoutAppBar, {
+                        [classes.layoutAppBarShift]: this.state.open,
                     })}
                 >
                     <Toolbar>
@@ -152,7 +152,7 @@ class Layout extends React.Component<LayoutProps> {
                             aria-label="open drawer"
                             onClick={this.handleDrawerOpen}
                             edge="start"
-                            className={clsx(classes.menuButton, this.state.open && classes.hide)}
+                            className={clsx(classes.layoutMenuButton, this.state.open && classes.layoutHide)}
                         >
                             <MenuIcon />
                         </IconButton>
@@ -162,23 +162,23 @@ class Layout extends React.Component<LayoutProps> {
                     </Toolbar>
                 </AppBar>
                 <Drawer
-                    className={classes.drawer}
+                    className={classes.layoutDrawer}
                     variant="persistent"
                     anchor="left"
                     open={this.state.open}
                     classes={{
-                        paper: classes.drawerPaper,
+                        paper: classes.layoutDrawerPaper,
                     }}
                 >
-                    <div className={classes.drawerHeader}>
+                    <div className={classes.layoutDrawerHeader}>
                         <IconButton onClick={this.handleDrawerClose}>
                             <ChevronLeftIcon />
                         </IconButton>
                     </div>
                     <Divider />
                     <List>
-                        {dummyList.map((item) => (
-                            <Link href={item.url}>
+                        {dummyList.map((item, index) => (
+                            <Link key={index} href={item.url}>
                                 <ListItem button key={item.name}>
                                     <ListItemIcon><div style={{display: 'flex'}}><Icon>{item.icon}</Icon></div></ListItemIcon>
                                     <ListItemText primary={item.name} />
@@ -188,11 +188,11 @@ class Layout extends React.Component<LayoutProps> {
                     </List>
                 </Drawer>
                 <main
-                    className={clsx(classes.content, {
-                        [classes.contentShift]: this.state.open,
+                    className={clsx(classes.layoutContent, {
+                        [classes.layoutContentShift]: this.state.open,
                     })}
                 >
-                    <div className={classes.drawerHeader} />
+                    <div className={classes.layoutDrawerHeader} />
                     <div className={styles.container}>
                         {children}
                     </div>

@@ -1,20 +1,8 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
-import CardComponent from "./CardComponent";
+import CardComponent, {CardItem} from "./CardComponent";
 
-export interface  CardItem {
-    CardLabel : string
-    CardHeaderTitle : string
-    CardHeaderSubheader : string
-    CardMediaImage : string
-    CardMediaTitle: string
-    CardContent : string
-    CardContentTypography1: string
-    CardContentTypography2: string
-    CardContentTypography3: string
-    CardContentTypography4: string
-    CardContentTypography5: string
-}
+
 
 class CardComponentList extends React.Component {
 
@@ -22,17 +10,20 @@ class CardComponentList extends React.Component {
         const cardItemList:Array<CardItem> =
         [
             {
-                CardLabel : "",
-                CardHeaderTitle : "",
-                CardHeaderSubheader : "",
+                CardLabel : "R",
+                CardHeaderTitle : "Shrimp and Chorizo Paella",
+                CardHeaderSubheader : "Shrimp and Chorizo Paella",
+                CardMediaImage : "",
+                CardMediaTitle: "Paella dish",
+                CardContent : "This impressive paella is a perfect party dish and a fun meal to cook together with your guests. Add 1 cup of frozen peas along with the mussels, if you like.",
+            },
+            {
+                CardLabel : "C",
+                CardHeaderTitle : "개발자 박종훈 이력 ",
+                CardHeaderSubheader : "fullstack 개발자 입니다",
                 CardMediaImage : "",
                 CardMediaTitle: "",
-                CardContent : "",
-                CardContentTypography1: "",
-                CardContentTypography2: "",
-                CardContentTypography3: "",
-                CardContentTypography4: "",
-                CardContentTypography5: "",
+                CardContent : "                                                            ",
 
             },
             {
@@ -42,11 +33,6 @@ class CardComponentList extends React.Component {
                 CardMediaImage : "",
                 CardMediaTitle: "",
                 CardContent : "",
-                CardContentTypography1: "",
-                CardContentTypography2: "",
-                CardContentTypography3: "",
-                CardContentTypography4: "",
-                CardContentTypography5: "",
 
             },
             {
@@ -56,12 +42,6 @@ class CardComponentList extends React.Component {
                 CardMediaImage : "",
                 CardMediaTitle: "",
                 CardContent : "",
-                CardContentTypography1: "",
-                CardContentTypography2: "",
-                CardContentTypography3: "",
-                CardContentTypography4: "",
-                CardContentTypography5: "",
-
             },
             {
                 CardLabel : "",
@@ -70,26 +50,6 @@ class CardComponentList extends React.Component {
                 CardMediaImage : "",
                 CardMediaTitle: "",
                 CardContent : "",
-                CardContentTypography1: "",
-                CardContentTypography2: "",
-                CardContentTypography3: "",
-                CardContentTypography4: "",
-                CardContentTypography5: "",
-
-            },
-            {
-                CardLabel : "",
-                CardHeaderTitle : "",
-                CardHeaderSubheader : "",
-                CardMediaImage : "",
-                CardMediaTitle: "",
-                CardContent : "",
-                CardContentTypography1: "",
-                CardContentTypography2: "",
-                CardContentTypography3: "",
-                CardContentTypography4: "",
-                CardContentTypography5: "",
-
             }
 
         ];
@@ -97,14 +57,10 @@ class CardComponentList extends React.Component {
             <div >
                 <Grid container spacing={2}>
                     {cardItemList.map((cardItem, i) => {
-                        if (i % 2 != 0) return (<div><Grid item xs={12} md={2}></Grid>
-                        <Grid item xs={12} md={10}>
-                            <CardComponent CardItem={cardItem}/>
-                        </Grid></div>)
-                        else return(<div><Grid item xs={12} md={10}>
-                            <CardComponent CardItem={cardItem}/>
-                        </Grid>
-                            <Grid item xs={12} md={2}></Grid></div>);
+                        return (<div key={i}><Grid item xs={12} md={2}></Grid>
+                            <Grid item xs={12} md={10}>
+                                <CardComponent CardItem={cardItem}/>
+                            </Grid></div>);
 
                     })}
                 </Grid>
