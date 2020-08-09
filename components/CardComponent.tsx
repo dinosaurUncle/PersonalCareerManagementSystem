@@ -3,7 +3,6 @@ import { createStyles, WithStyles, withStyles} from '@material-ui/core/styles';
 import { Theme } from "@material-ui/core/styles/createMuiTheme";
 import Card from '@material-ui/core/Card';
 import CardHeader from '@material-ui/core/CardHeader';
-//import CardMedia from '@material-ui/core/CardMedia';
 import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Avatar from '@material-ui/core/Avatar';
@@ -55,13 +54,18 @@ export interface  CardItem {
 }
 
 export interface CardComponentState {
-    expanded : boolean
+    CardMediaImage : string
+    CardMediaTitle: string
 }
 
 
 
 class CardComponent extends React.Component<CardComponentProps> {
 
+    state : CardComponentState ={
+        CardMediaImage : this.props.CardItem.CardMediaImage ? this.props.CardItem.CardMediaImage : "",
+        CardMediaTitle : this.props.CardItem.CardMediaTitle ? this.props.CardItem.CardMediaTitle : ""
+    }
     render(){
         const {classes, CardItem} = this.props;
         return (
@@ -80,7 +84,7 @@ class CardComponent extends React.Component<CardComponentProps> {
                     title={CardItem.CardHeaderTitle}
                     subheader={CardItem.CardHeaderSubheader}
                 />
-
+                <img src="https://prezentr.com/wp-content/uploads/2016/07/Flat-Design-PowerPoint-Template-Preview-810x456.png" />
                 <CardContent>
                     <Typography variant="body2" color="textSecondary" component="p">
                         {CardItem.CardContent}

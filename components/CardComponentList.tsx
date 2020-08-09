@@ -1,10 +1,13 @@
 import React from 'react';
 import Grid from '@material-ui/core/Grid';
 import CardComponent, {CardItem} from "./CardComponent";
+import {IndexPageProps} from "../pages/index"
 
 
+export interface CardComponentListProps extends IndexPageProps {
+}
 
-class CardComponentList extends React.Component {
+class CardComponentList extends React.Component<CardComponentListProps>  {
 
     render(){
         const cardItemList:Array<CardItem> =
@@ -53,14 +56,12 @@ class CardComponentList extends React.Component {
             }
 
         ];
+        const { ...props } = this.props;
         return (
             <div >
                 <Grid container spacing={2}>
                     {cardItemList.map((cardItem, i) => {
-                        return (<div key={i}><Grid item xs={12} md={2}></Grid>
-                            <Grid item xs={12} md={10}>
-                                <CardComponent CardItem={cardItem}/>
-                            </Grid></div>);
+                        return <CardComponent key={i} { ...props } CardItem={cardItem}/>;
 
                     })}
                 </Grid>

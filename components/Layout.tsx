@@ -117,7 +117,6 @@ class Layout extends React.Component<LayoutProps> {
 
     render(){
         const {classes, title, children} = this.props;
-
         const dummyList:Array<itemDataList> = [
             {
                 name: "Home",
@@ -131,8 +130,10 @@ class Layout extends React.Component<LayoutProps> {
             }
         ]
         return (
+
             <div className={classes.layoutRoot}>
                 <Head>
+
                     <title>{title}</title>
                     <meta charSet="utf-8" />
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
@@ -153,6 +154,7 @@ class Layout extends React.Component<LayoutProps> {
                             onClick={this.handleDrawerOpen}
                             edge="start"
                             className={clsx(classes.layoutMenuButton, this.state.open && classes.layoutHide)}
+
                         >
                             <MenuIcon />
                         </IconButton>
