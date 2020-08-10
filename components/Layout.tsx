@@ -139,6 +139,12 @@ class Layout extends React.Component<LayoutProps> {
                     <meta name="viewport" content="initial-scale=1.0, width=device-width" />
                     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap" />
                     <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons" />
+                    <link
+                        rel="stylesheet"
+                        href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css"
+                        integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk"
+                        crossOrigin="anonymous"
+                    />
                 </Head>
                 <CssBaseline />
                 <AppBar

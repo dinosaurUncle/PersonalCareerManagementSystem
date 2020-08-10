@@ -54,3 +54,10 @@ typescript 용 style 처리를 위한 확장용 lib
 ```
 yarn add @material-ui/core/styles
 ```
+
+##bootstrap 추가
+
+```
+$ yarn add react-bootstrap bootstrap
+$ yarn add @types/react-bootstrap @types/bootstrap
+```

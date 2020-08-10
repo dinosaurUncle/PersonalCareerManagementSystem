@@ -1,47 +1,7 @@
 import React from 'react';
-import { createStyles, WithStyles, withStyles} from '@material-ui/core/styles';
-import { Theme } from "@material-ui/core/styles/createMuiTheme";
-import Card from '@material-ui/core/Card';
-import CardHeader from '@material-ui/core/CardHeader';
-import CardContent from '@material-ui/core/CardContent';
-import CardActions from '@material-ui/core/CardActions';
-import Avatar from '@material-ui/core/Avatar';
-import IconButton from '@material-ui/core/IconButton';
-import Typography from '@material-ui/core/Typography';
-import { red } from '@material-ui/core/colors';
-import FavoriteIcon from '@material-ui/icons/Favorite';
-import ShareIcon from '@material-ui/icons/Share';
-import MoreVertIcon from '@material-ui/icons/MoreVert';
+import { Card, Button } from 'react-bootstrap';
 
-const useStyles = (theme: Theme) =>
-    createStyles({
-        root: {
-            margin: 30,
-            maxWidth: 345,
-            width: 270
-        },
-        media: {
-            height: 0,
-            paddingTop: '56.25%', // 16:9
-        },
-        expand: {
-            transform: 'rotate(0deg)',
-            marginLeft: 'auto',
-            transition: theme.transitions.create('transform', {
-                duration: theme.transitions.duration.shortest,
-            }),
-        },
-        expandOpen: {
-            transform: 'rotate(180deg)',
-        },
-        avatar: {
-            backgroundColor: red[500],
-        },
-    });
-
-
-export interface CardComponentProps extends WithStyles<typeof useStyles> {
-    CardItem : CardItem
+export interface CardComponentProps  {
 }
 
 export interface  CardItem {
@@ -62,45 +22,21 @@ export interface CardComponentState {
 
 class CardComponent extends React.Component<CardComponentProps> {
 
-    state : CardComponentState ={
-        CardMediaImage : this.props.CardItem.CardMediaImage ? this.props.CardItem.CardMediaImage : "",
-        CardMediaTitle : this.props.CardItem.CardMediaTitle ? this.props.CardItem.CardMediaTitle : ""
-    }
     render(){
-        const {classes, CardItem} = this.props;
         return (
-            <Card className={classes.root}>
-                <CardHeader
-                    avatar={
-                        <Avatar aria-label="recipe" className={classes.avatar}>
-                            {CardItem.CardLabel}
-                        </Avatar>
-                    }
-                    action={
-                        <IconButton aria-label="settings">
-                            <MoreVertIcon />
-                        </IconButton>
-                    }
-                    title={CardItem.CardHeaderTitle}
-                    subheader={CardItem.CardHeaderSubheader}
-                />
-                <img src="https://prezentr.com/wp-content/uploads/2016/07/Flat-Design-PowerPoint-Template-Preview-810x456.png" />
-                <CardContent>
-                    <Typography variant="body2" color="textSecondary" component="p">
-                        {CardItem.CardContent}
-                    </Typography>
-                </CardContent>
-                <CardActions disableSpacing>
-                    <IconButton aria-label="add to favorites">
-                        <FavoriteIcon />
-                    </IconButton>
-                    <IconButton aria-label="share">
-                        <ShareIcon />
-                    </IconButton>
-                </CardActions>
+            <Card style={{ width: '18rem' }}>
+                <Card.Img variant="top" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%22286%22%20height%3D%22180%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%20286%20180%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_173d8b23cb2%20text%20%7B%20fill%3A%23999%3Bfont-weight%3Anormal%3Bfont-family%3A-apple-system%2CBlinkMacSystemFont%2C%26quot%3BSegoe%20UI%26quot%3B%2CRoboto%2C%26quot%3BHelvetica%20Neue%26quot%3B%2CArial%2C%26quot%3BNoto%20Sans%26quot%3B%2Csans-serif%2C%26quot%3BApple%20Color%20Emoji%26quot%3B%2C%26quot%3BSegoe%20UI%20Emoji%26quot%3B%2C%26quot%3BSegoe%20UI%20Symbol%26quot%3B%2C%26quot%3BNoto%20Color%20Emoji%26quot%3B%2C%20monospace%3Bfont-size%3A14pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_173d8b23cb2%22%3E%3Crect%20width%3D%22286%22%20height%3D%22180%22%20fill%3D%22%23373940%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%22106.0078125%22%20y%3D%2296.6%22%3E286x180%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" />
+                <Card.Body>
+                    <Card.Title>Card Title</Card.Title>
+                    <Card.Text>
+                        Some quick example text to build on the card title and make up the bulk of
+                        the card's content.
+                    </Card.Text>
+                    <Button variant="primary">Go somewhere</Button>
+                </Card.Body>
             </Card>
         );
     }
 
 
-} export default withStyles(useStyles)(CardComponent);
+} export default CardComponent;
