@@ -83,6 +83,7 @@ export interface LayoutProps extends WithStyles<typeof useStyles> {
     children?: ReactNode
     title?: string
     theme?: string
+    isStyle?: boolean
 }
 
 export interface LayoutState {
@@ -116,7 +117,7 @@ class Layout extends React.Component<LayoutProps> {
     };
 
     render(){
-        const {classes, title, children} = this.props;
+        const {classes, title, children, isStyle} = this.props;
         const dummyList:Array<itemDataList> = [
             {
                 name: "Home",
@@ -201,7 +202,7 @@ class Layout extends React.Component<LayoutProps> {
                     })}
                 >
                     <div className={classes.layoutDrawerHeader} />
-                    <div className={styles.container}>
+                    <div className={isStyle ? styles.container : ""}>
                         {children}
                     </div>
                 </main>

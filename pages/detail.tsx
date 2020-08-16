@@ -1,25 +1,27 @@
-import Link from 'next/link'
+import {Container, Row, Tabs, Tab,} from 'react-bootstrap';
 import Layout from '../components/Layout'
-import CardComponentList from "../components/CardComponentList";
-import styles from '../styles/Home.module.css'
 import React from "react";
-
 class DetailPage extends React.Component {
 
     render(){
         const { ...props } = this.props;
-        console.log(props);
         return (
-            <Layout {...props} title="Home | Next.js + TypeScript Example">
-                <div className={styles.container}>
-                    <h2 className={styles.title}>등록된 이력 리스트</h2>
-                    <CardComponentList {...props} />
-                    <p>
-                        <Link href="/about">
-                            <a>About</a>
-                        </Link>
-                    </p>
-                </div>
+            <Layout {...props} title="Home | Next.js + TypeScript Example" isStyle={false}>
+
+                <Container style={{padding:"1rem", border:" solid #ececec", borderRadius: "8px"}}>
+                    <Row>
+                        <Tabs defaultActiveKey="profile" id="uncontrolled-tab-example">
+                            <Tab eventKey="home" title="Home">
+
+                            </Tab>
+                            <Tab eventKey="profile" title="Profile">
+                            </Tab>
+                            <Tab eventKey="contact" title="Contact" >
+
+                            </Tab>
+                        </Tabs>
+                    </Row>
+                </Container>
             </Layout>)
     }
 }

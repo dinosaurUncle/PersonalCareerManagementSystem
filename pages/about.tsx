@@ -2,7 +2,7 @@ import Link from 'next/link'
 import Layout from '../components/Layout'
 
 const AboutPage = () => (
-    <Layout theme="rtl" title="About | Next.js + TypeScript Example">
+    <Layout theme="rtl" title="About | Next.js + TypeScript Example" isStyle={true}>
         <h1>About</h1>
         <p>This is the about page</p>
         <p>
